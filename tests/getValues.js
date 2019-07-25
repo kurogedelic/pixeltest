@@ -1,5 +1,5 @@
 "use strict";
-const Testmode = ['grid', 'gamma', 'fills', 'checker'];
+// @testmode = int, grid, gamma, fills, checker
 var mouse;
 var displayInfo;
 var windowInfo;
@@ -7,6 +7,22 @@ var canvasInfo;
 var settingsInfo;
 var cursorInfo;
 
+const canvas = document.getElementById("canvas");
+
+
+canvasInfo = {
+      x: 10,
+      y: 10,
+      w: 50,
+      h: 50,
+      state: "int"
+    };
+
+   settingsInfo = {
+        x: 10,
+        y: 10,
+        visible: false
+    };
 
 function getDisplayInfo() {
     displayInfo = {
@@ -15,6 +31,17 @@ function getDisplayInfo() {
     };
     console.info(displayInfo.w);
 };
+
+
+function getWindowInfo() {
+    windowInfo = {
+        w: window.parent.screen.width,
+        h: window.parent.screen.height
+    };
+
+};
+ 
+ 
 
 
 function getCursorInfo(event) {
@@ -28,9 +55,16 @@ function getCursorInfo(event) {
 };
 
 
+function updateCanvas(){
+canvas.style.top = canvasInfo.y;
+canvas.style.left = canvasInfo.x;
+canvas.style.width = canvasInfo.w;
+canvas.style.height = canvasInfo.h;
+}
 
 function init() {
     window.onmousemove = getCursorInfo;
     getDisplayInfo();
+    updateCanvas();
 
 }
